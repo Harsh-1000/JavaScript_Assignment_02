@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript_Assignment_02</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+
+        var numbers =[];
+
+        /**
+         * 
+         * getNumber - use to take input as numbers in numbers array
+         * 
+         * */
+        function getNumber()
+        {
+            const input = document.getElementById('number');
+
+            if(input.value===''){
+                window.alert("Please Enter number before submit");
+                document.getElementById('number').focus();
+                return;
+            }
+            
+            if(isNaN(input.value)||input.value===" "){
+                window.alert("worng input only numbers are allowed.")
+                document.getElementById('number').focus();
+                input.value="";
+                return;
+            }
+
+            numbers.push(parseInt(input.value));
+            document.getElementById('show').value=numbers;
+        }
+
+       
+
+        /**
+         * doCalculation this method is used to do the arthmetic calculations and show on the screen
+         *
+         * @param operation - type of the arthmetic operation 
+         * 
+         * */
+        function doCalculation(operation)
+        {
+            if(numbers.length<2){
+                window.alert(`Please Enter at least 2 number to perform ${operation}`);
+                document.getElementById('number').focus();
+                return;
+            }
+
+            let ans;
+
+            switch(operation)
+            {
+                case 'addition': 
+                    ans = addNumbers();
+                    break;
+                case 'subtraction':
+                    ans = subtractNumbers();
+                    break;
+                case 'mutiplication':
+                    ans = multiplyNumbers();
+                    break;
+                case 'division':
+                    ans = divideNumbers(); 
+            }
+
+            document.getElementById('number').value = ans;
+            document.getElementById('show').value='';
+            document.getElementById('number').focus();
+            numbers=[];
+        }
+
+        /**
+         * addNumbers - method to add numbers present in numbers array      
+         * */
+        function addNumbers(){
+            let ans=numbers[0];
+
+            for(let k=1;k<numbers.length;k++)
+                ans += numbers[k];
+
+            return ans;
+        }
+
+        /**
+         * subtractNumbers - method to subtract numbers present in numbers array      
+         * */
+        function subtractNumbers(){
+            let ans=numbers[0];
+
+            for(let k=1;k<numbers.length;k++)
+                ans = ans - numbers[k];
+
+            return ans;
+        }
+
+        /**
+         * multiplyNumbers - method to multiply numbers present in numbers array      
+         * */
+        function multiplyNumbers() {
+            let ans=numbers[0];
+
+            for(let k=1;k<numbers.length;k++)
+                ans *= numbers[k];
+
+            return ans;
+        }
+
+        /**
+         * divideNumbers - method to divide numbers present in numbers array      
+         * */
+        function divideNumbers() {
+            let ans=numbers[0];
+
+            for(let k=1;k<numbers.length;k++)
+                ans /= numbers[k];
+
+            return ans;
+        }
+
+    </script>
+</head>
+<body>
+   
+    <div class="calci">
+       <div class="calci-input">
+            <h1>Calculator</h1>
+            <label for="number">Screen</label>
+            <input type="text" placeholder="Enter the number" id="number" autofocus>
+            <label for="show">Numbers you have submitted</label>
+            <input type="text" placeholder="numbers array" id="show" disabled>
+            <button id="submit-btn" onclick="getNumber()">Submit</button>
+       </div>
+           
+       <div class="calci-btn">
+        <button id="add-btn" onclick="doCalculation('addition')">+</button>
+        <button id="subtract-btn" onclick="doCalculation('subtraction')">-</button>
+        <button id="multiply-btn" onclick="doCalculation('mutiplication')">x</button>
+        <button id="divide-btn" onclick="doCalculation('division')">/</button>
+       </div>
+    </div>
+</body>
+</html>
