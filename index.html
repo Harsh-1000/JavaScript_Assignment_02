@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <script>
 
+        /**
+         * numbers - array to store input numbers for calculation
+        */
         var numbers =[];
 
         /**
@@ -33,9 +36,10 @@
 
             numbers.push(parseInt(input.value));
             document.getElementById('show').value=numbers;
+            document.getElementById('number').value='';
+            document.getElementById('number').focus();
+         
         }
-
-       
 
         /**
          * doCalculation this method is used to do the arthmetic calculations and show on the screen
